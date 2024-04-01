@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MAAM - The Most Awesome Asset Marketplace in the World!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="js/buyer.js"></script>
+
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+        .modal-content iframe{
+            margin: 0 auto;
+            display: block;
+        }
+        .btn-primary, .btn-primary:hover, .btn-primary:visited {
+            background-color: transparent !important;
+            border-color: transparent !important;
+        }
+        .modal-content {
+            width: 800px !important;
+        }
+    </style>
+
+
+    <script id="entry-template" type="text/x-handlebars-template">
+        <span class="list-group-item">
+            <div class="row">
+                <div class="media col-lg-4 col-md-4">
+                    <figure class="pull-left">
+
+                        <a id="vid" href="#myModal" class="btn btn-lg btn-primary" data-toggle="modal">
+                        <img class="media-object img-rounded img-responsive"  src="{{image}}" alt="" width="300">
+                         </a>
+
+<div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">YouTube Video</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe id="cartoonVideo" width="770" height="400" src="//www.youtube.com/embed/3rnfoDYXxT8" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                        <h4 class="list-group-item-heading">Price: {{price}}€</h4>
+                    </figure>
+
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h4 class="list-group-item-heading">Type</h4>
+                    <p class="list-group-item-text">{{type}}</p>
+                    <h4 class="list-group-item-heading">City</h4>
+                    <p class="list-group-item-text">{{city}}</p>
+                    <h4 class="list-group-item-heading">Street</h4>
+                    <p class="list-group-item-text">{{street}}</p>
+                    <h4 class="list-group-item-heading">Year</h4>
+                    <p class="list-group-item-text">{{year}}</p>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <h4 class="list-group-item-heading">Size</h4>
+                    <p class="list-group-item-text">{{size}} m²</p>
+                    <h4 class="list-group-item-heading">Rooms</h4>
+                    <p class="list-group-item-text">{{rooms}}</p>
+                    <h4 class="list-group-item-heading">Energy Class</h4>
+                    <p class="list-group-item-text">{{energyclass}}</p>
+                    <button type="button" class="btn btn-default btn-lg btn-block"> Place Bid! </button>
+                </div>
+            </div>
+        </span>
+    </script>
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="localhost:8080" onclick=$( "#menu-close").click();>Home</a>
+            </li>
+            <li>
+                <a href="/buyer.html" onclick=$( "#menu-close").click();>Buy an asset</a>
+            </li>
+            <li>
+                <a href="/seller.html" onclick=$( "#menu-close").click();>Sell an asset</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="head" id="top">  
+        <div class="text-vertical-center2">
+            <h2 style="margin-top: 1%;">MAAM - Most Awesome Asset Marketplace</h2>
+    </header>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container text-center">
+
+            <div class="well">
+            <h2 class="text-center" style="margin-bottom:5%;">List of all assets for sale</h2>
+            <div class="list-group">
+                <div id="entries"></div>
+
+          <!--      <a href="#" class="list-group-item">
+                    <div class="row">
+                        <div class="media col-lg-4 col-md-4">
+                            <figure class="pull-left">
+                                <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                                <h4 class="list-group-item-heading">Price: 12345€</h4>
+                            </figure>
+
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <h4 class="list-group-item-heading">Type</h4>
+                            <p class="list-group-item-text">Public Building</p>
+                            <h4 class="list-group-item-heading">City</h4>
+                            <p class="list-group-item-text">Copenhagen</p>
+                            <h4 class="list-group-item-heading">Street</h4>
+                            <p class="list-group-item-text">Universitetsparken 5</p>
+                            <h4 class="list-group-item-heading">Year</h4>
+                            <p class="list-group-item-text">1337</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <h4 class="list-group-item-heading">Size</h4>
+                            <p class="list-group-item-text">2000 m²</p>
+                            <h4 class="list-group-item-heading">Rooms</h4>
+                            <p class="list-group-item-text">25</p>
+                            <h4 class="list-group-item-heading">Energy Class</h4>
+                            <p class="list-group-item-text">Class D</p>
+                            <button type="button" class="btn btn-default btn-lg btn-block"> Place Bid! </button>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item">
+                    <div class="row">
+                        <div class="media col-lg-4 col-md-4">
+                            <figure class="pull-left">
+                                <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                                <h4 class="list-group-item-heading">Price: 12345€</h4>
+                            </figure>
+
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <h4 class="list-group-item-heading">Type</h4>
+                            <p class="list-group-item-text">Public Building</p>
+                            <h4 class="list-group-item-heading">City</h4>
+                            <p class="list-group-item-text">Copenhagen</p>
+                            <h4 class="list-group-item-heading">Street</h4>
+                            <p class="list-group-item-text">Universitetsparken 5</p>
+                            <h4 class="list-group-item-heading">Year</h4>
+                            <p class="list-group-item-text">1337</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <h4 class="list-group-item-heading">Size</h4>
+                            <p class="list-group-item-text">2000 m²</p>
+                            <h4 class="list-group-item-heading">Rooms</h4>
+                            <p class="list-group-item-text">25</p>
+                            <h4 class="list-group-item-heading">Energy Class</h4>
+                            <p class="list-group-item-text">Class D</p>
+                            <button type="button" class="btn btn-default btn-lg btn-block"> Place Bid! </button>
+                        </div>
+                    </div>
+                </a>-->
+            </div>
+        </div>
+            <!--<h2>Available Assets for Sale!</h2>-->
+            <!--<p class="lead">....</p>-->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <!--
+    <section id="services" class="services bg-primary text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 mx-auto">
+                    <h2>Asset Lifecycle Management</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Manage your asset</strong>
+                                </h4>
+                                <p>You can manage your asset, claim ownership and register repairs and renovations.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Sell your asset</strong>
+                                </h4>
+                                <p>You want so sell your asset? You can put it on the Marketplace and offer it to buyers.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Request a Loan</strong>
+                                </h4>
+                                <p>You want to buy an asset and need a loan? Directly request it from a bank via our system.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Buy an asset</strong>
+                                </h4>
+                                <p>The actual exchange of money and asset is done via a blockchain-based smart contract.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Callout -->
+    <aside class="callout">
+        <div class="text-vertical-center">
+            <h1>You will love it!</h1>
+        </div>
+    </aside>
+
+    <!-- Call to Action -->
+    <aside class="call-to-action bg-primary text-white">
+        <div class="container text-center">
+            <h3>The buttons below are impossible to resist.</h3>
+            <a href="#" class="btn btn-lg btn-light">Click Me!</a>
+            <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
+        </div>
+    </aside>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center">
+                    <h4><strong>Most Awesome Asset Marketplace</strong>
+                    </h4>
+                    <p>Universitetsparken 5
+                        <br>Copenhagen, Denmark</p>
+                    <br>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">Copyright &copy; MAAM 2017</p>
+                </div>
+            </div>
+        </div>
+        <a id="to-top" href="#top" class="btn btn-dark btn-lg page-scroll"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <!--<script src="js/stylish-portfolio.js"></script>-->
+
+</body>
+
+</html>
